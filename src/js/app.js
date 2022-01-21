@@ -42,7 +42,7 @@ function drawField() {
   && item.dataset.row === `${rowRandow}`);
   element.classList.remove('free');
   element.classList.add('busy');
-  console.log('field busy', element);
+  // console.log('field busy', element);
   const imgNew = createImg();
   element.insertAdjacentElement('afterBegin', imgNew);
 }
@@ -54,7 +54,7 @@ function isActive() {
 function changeField() {
   const t = isActive.call(arrField);
   const deletable = arrField[t].firstElementChild;
-  console.log('удаляем -', deletable);
+  // console.log('удаляем -', deletable);
 
   arrField[t].classList.remove('busy');
   arrField[t].classList.add('free');
