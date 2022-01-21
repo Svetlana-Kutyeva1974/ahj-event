@@ -1,0 +1,8 @@
+{
+  "name": "ahj-event",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Svetlana-Kutyeva1974/ahj-event.git",
+  "author": "Svetlana Kutyova <kutyovas@yandex.ru>",
+  "license": "MIT"
+}

@@ -1,0 +1,54 @@
+* {
+    box-sizing: border-box;
+}
+
+.title {
+    text-align: center;
+}
+
+
+
+#board {
+    position: relative;
+    height: 450px;
+    width: 450px;
+    margin: 50px auto 30px auto;
+    overflow: hidden;
+    display: grid;
+    grid-auto-columns: 1fr;
+    grid-auto-rows: 1fr;
+    grid-gap: 10px;
+}
+
+.field {
+    background-color: rgb(200, 255, 129);
+    border-radius: 50%;
+    cursor: pointer;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 5em;
+    font-family: 'Arial', sans-serif;
+}
+
+.style-img {
+    box-sizing: border-box;
+    width: 100%;
+}
+/*
+.busy {
+    background-image: url(".src/img/goblin.png");
+    cursor: pointer;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 5em;
+    font-family: 'Arial', sans-serif;
+    }
+
+.free:hover {
+    background-color: #3d4250;
+}
+*/
