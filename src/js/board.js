@@ -1,10 +1,29 @@
-const boardEl = document.getElementById('board');
+export default class Board {
+  constructor(size) { //
+    this.size = size;
+    this.board = this.fillNewBoard();
+    // this.renderBoard(this.fillNewBoard());
+  }
 
-export default function renderBoard(board) {
-  const fields = [];
-  for (const [i, row] of board.entries()) {
-    for (const [j, value] of row.entries()) {
-      fields.push(`
+  fillNewBoard() {
+    const newBoard = [];
+    // console.log(newBoard);
+    for (let i = 0; i < this.size; i += 1) {
+      newBoard[i] = [];
+      for (let j = 0; j < this.size; j += 1) {
+        newBoard[i][j] = '';
+      }
+    }
+    return newBoard;
+  }
+
+  renderBoard() {
+    const boardEl = document.getElementById('board');
+    const fields = [];
+    for (const [i, row] of this.board.entries()) {
+    // for (const [i, row] of this.fillNewboard().entries()) {
+      for (const [j, value] of row.entries()) {
+        fields.push(`
         <div class="field ${value ? 'busy' : 'free'}" 
             data-row="${i}" 
             data-col="${j}"
@@ -13,7 +32,8 @@ export default function renderBoard(board) {
           ${value || ''}
         </div>
       `);
+      }
     }
+    boardEl.innerHTML = fields.join('');
   }
-  boardEl.innerHTML = fields.join('');
 }

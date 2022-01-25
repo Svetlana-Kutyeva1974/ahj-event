@@ -48,7 +48,11 @@
     font-family: 'Arial', sans-serif;
     }
 
+
 .free:hover {
     background-color: #3d4250;
 }
 */
+.busy {
+    cursor: ('../src/img/640.jpg') , crosshair;
+    }
