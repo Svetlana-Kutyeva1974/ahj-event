@@ -1,16 +1,16 @@
 import Board from './board.js';
-
 import Img from './imgCreate.js';
-// block отрисовки
+
 let count = 0;
-let countChange = 0;
+let countChange = 1;
 let id;
 let loss = 0;
+const imgNew = Img.create();
 const board = new Board(4);
 board.renderBoard();
 
-// ynew blocl logic
 const arrField = Array.from(document.getElementsByClassName('field')); // все поля
+const fullBoard = document.getElementById('board'); // общее поле для делигирования
 
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -19,13 +19,11 @@ function getRandomInt(min, max) {
 function drawField() {
   const colRandom = getRandomInt(0, 3);
   const rowRandow = getRandomInt(0, 3);
-  console.log('текущая клетка', colRandom, rowRandow);
   const element = arrField.find((item) => item.dataset.col === `${colRandom}`
   && item.dataset.row === `${rowRandow}`);
   element.classList.remove('free');
   element.classList.add('busy');
-  // console.log('field busy', element);
-  const imgNew = Img.create();
+  // const imgNew = Img.create();
   element.insertAdjacentElement('afterBegin', imgNew);
 }
 
@@ -33,54 +31,44 @@ function isActive() {
   return (arrField.findIndex((item) => (item.classList.contains('busy'))));
 }
 
-function changeField() {
+function toggleField() {
   const t = isActive.call(arrField);
-  const deletable = arrField[t].firstElementChild;
-  // console.log('удаляем -', deletable);
-
-  // const filterWidgetEl = document.querySelector('[data-widget=filter-widget]');
-  // const filterBtnEl = filterWidgetEl.querySelector('[data-action=filter]');
-  // const filterTextEl = filterWidgetEl.querySelector('[data-id=filter-text]')
-  arrField[t].addEventListener('click', (event) => {
-    event.preventDefault();
-    console.log('событие', event);
-    Img.create().style.cursor = 'crosshair';
-    deletable.style.cursor = 'crosshair';
-    // Img.create().style.cursor = `${url('./img/640.jpg')}`;
-    // this.querySelector("a.task__remove").parentNode.remove();
-    if (event.target.value === Img.create()) {
-      count += 1;
-      countChange = count;
-      console.log('event.target', event.target);
-      console.log('счетчик', count);
-      // console.log(filterTextEl);
-      /*
-      if (count === 5 || countChange === 5) {
-        clearInterval(id);
-        alert('Игра окончена. Допущено 5 промахов');
-      }
-      */
-    } else {
-      loss += 1;
-      console.log('промахов', loss);
+  if (t !== -1) {
+    const deletable = arrField[t].firstElementChild;
+    arrField[t].classList.remove('busy');
+    arrField[t].classList.add('free');
+    if (arrField[t].classList.contains('hide')) {
+      arrField[t].classList.remove('hide');
     }
-  });
-
-  arrField[t].classList.remove('busy');
-  arrField[t].classList.add('free');
-  deletable.remove();
-  drawField();
-
-  console.log('счетчик изменений', countChange);
-  if (loss === 5) {
-    clearInterval(id);
-    alert('Игра окончена. Допущено 5 промахов');
+    deletable.remove();
+    drawField();
+    imgNew.style.display = 'flex';
   }
+}
 
-  deletable.style.cursor = 'default';
+function changeField() {
+  toggleField();
+  // console.log('счетчик изменений', countChange);
+  if (loss === 5 || (countChange - count - loss) === 5) {
+    clearInterval(id);
+    alert(`Игра окончена! \n Появилось : ${countChange}\n ------------ \n Попаданий при клике : ${count}  \n Допущено промахов при клике : ${loss}\n Пропущено появлений в ячейках : ${countChange - count - loss}`);
+  }
   countChange += 1;
-  // Img.create().style.cursor = 'default';
 }
 
 drawField();
-id = setInterval(() => changeField.call(arrField), 2000);
+
+fullBoard.addEventListener('click', (event) => {
+  // console.log('-event.target + closest', event.target, '\n', event.target.closest('.style-img'));
+  if (event.target.closest('.style-img')) {
+    count += 1;
+    // console.log('счетчик попаданий', count);
+    arrField[isActive.call(arrField)].classList.add('hide');
+    imgNew.style.display = 'none';
+  } else {
+    loss += 1;
+    // console.log('промахов', loss);
+  }
+});
+
+id = setInterval(() => changeField.call(arrField), 1000);

@@ -7,7 +7,6 @@ export default class Board {
 
   fillNewBoard() {
     const newBoard = [];
-    // console.log(newBoard);
     for (let i = 0; i < this.size; i += 1) {
       newBoard[i] = [];
       for (let j = 0; j < this.size; j += 1) {
@@ -21,7 +20,6 @@ export default class Board {
     const boardEl = document.getElementById('board');
     const fields = [];
     for (const [i, row] of this.board.entries()) {
-    // for (const [i, row] of this.fillNewboard().entries()) {
       for (const [j, value] of row.entries()) {
         fields.push(`
         <div class="field ${value ? 'busy' : 'free'}" 

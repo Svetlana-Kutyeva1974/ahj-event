@@ -37,22 +37,16 @@
     width: 100%;
 }
 /*
-.busy {
-    background-image: url(".src/img/goblin.png");
-    cursor: pointer;
-    color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 5em;
-    font-family: 'Arial', sans-serif;
-    }
-
 
 .free:hover {
     background-color: #3d4250;
 }
 */
 .busy {
-    cursor: ('../src/img/640.jpg') , crosshair;
-    }
+    cursor: url("../img/mol.jpg") , auto;
+}
+
+.hide {
+    background-color: rgb(10, 10, 10);
+    border-radius: 50%;
+}

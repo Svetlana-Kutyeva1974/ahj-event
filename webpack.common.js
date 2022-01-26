@@ -31,6 +31,7 @@ module.exports = {
           MiniCssExtractPlugin.loader, 'css-loader',
         ],
       },
+      /*
       {
         test: /\.(png|jpg|gif)$/i,
         dependency: { not: ['url'] },
@@ -40,17 +41,14 @@ module.exports = {
             options: {
               mimetype: './img/png',
             },
-            /*options: {
-              limit: 8192,
-            },
-            */
           },
         ],
       },
-      //{
-      //  test: /\.(?:jpg|jpeg|png|gif|ico)$/,
-      //  type: 'asset/resource',
-      //},
+      */
+      {
+        test: /\.(?:jpg|jpeg|png|gif|ico)$/,
+        type: 'asset/resource',
+      },
       {
         test: /\.svg$/,
         type: 'asset/resource',
